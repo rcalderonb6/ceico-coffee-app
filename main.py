@@ -9,7 +9,7 @@ chart_data=pd.DataFrame(np.random.randn(20,3),columns=["a","b","c"])
 members=['Øyvind','Rodrigo','Valentina','Fede','Iggy']
 
 coffees_per_kg=0
-number_of_cups,price_kg=10,2.
+number_of_cups, price_kg=10,2.
 
 def compute_price_per_cup(n_cups,price_kg):
   return price_kg/n_cups

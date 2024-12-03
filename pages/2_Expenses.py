@@ -3,6 +3,23 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# EXPENSES_DATA_FILE=
+
+# Load expenses data from file if it exists, otherwise create it
+# try:
+#     coffee_df = pd.DataFrame(np.load(COFFEE_DATA_FILE, allow_pickle=True),columns=COLUMNS)
+    
+# except FileNotFoundError:
+#     coffee_df = pd.DataFrame(
+#         [
+#             {"Date": str(date).strip('00:00:00'), "Name": member, "Cups": 0, "Total Cups/Kg":0,"Coffee Bag Number":0, "Full Date": date ,}
+#             for member in members
+#             for date in date_range
+#         ]
+#     )
+
+
+
 if "expenses" not in st.session_state:
     st.session_state["expenses"] = []  # Initialize empty list for expenses
     
@@ -84,30 +101,39 @@ if len(st.session_state["users"]) > 0 and len (st.session_state["expenses"])>0:
 
     # Visualize balances with bar chart
     st.header("Balance Overview")
-    positive_balances = {user: balance for user, balance in balances.items() if balance > 0}
-    negative_balances = {user: balance for user, balance in balances.items() if balance < 0}
-    fig, ax = plt.subplots(figsize=(10, 5))
+    
+    # st.write(balance_df['Balance'].size)
+    # colors=["#ffaa00"]*balance_df['Balance'].size
+    
+    # colors[balance_df['Balance']<=0]="#ffaa00"
+    st.bar_chart(balance_df,x='User',y='Balance')#,color=colors)
+    # positive_balances = {user: balance for user, balance in balances.items() if balance > 0}
+    # negative_balances = {user: balance for user, balance in balances.items() if balance < 0}
+    
+    # fig, ax = plt.subplots(figsize=(10, 5))
+    # fig.patch.set_facecolor("black")  # Set figure background color
+    # ax.set_facecolor("black") 
+    # # Positive balances
+    # ax.bar(
+    #     positive_balances.keys(),
+    #     positive_balances.values(),
+    #     color="green",
+    #     label="Positive Balances",
+    # )
 
-    # Positive balances
-    ax.bar(
-        positive_balances.keys(),
-        positive_balances.values(),
-        color="green",
-        label="Positive Balances",
-    )
+    # # Negative balances
+    # ax.bar(
+    #     negative_balances.keys(),
+    #     negative_balances.values(),
+    #     color="red",
+    #     label="Negative Balances",
+    #     edgecolor="white"
+    # )
 
-    # Negative balances
-    ax.bar(
-        negative_balances.keys(),
-        negative_balances.values(),
-        color="red",
-        label="Negative Balances",
-    )
+    # ax.axhline(0, color="white", linewidth=0.8)
+    # ax.set_title("Balance Overview",color='white')
+    # ax.set_xlabel("Users",color='white')
+    # ax.set_ylabel("Balance",color='white')
+    # ax.legend(facecolor="black", edgecolor="white")  # Legend with black background
 
-    ax.axhline(0, color="black", linewidth=0.8)
-    ax.set_title("Balance Overview")
-    ax.set_xlabel("Users")
-    ax.set_ylabel("Balance")
-    ax.legend()
-
-    st.pyplot(fig)
+    # st.pyplot(fig)
